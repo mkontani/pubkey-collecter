@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+'use strict'
+const { collect, parseRaw } = require('../collecter')
+const path = require('path')
+
+const options = process.env.HOSTING_CONF
+  ? require(process.env.HOSTING_CONF) : require(path.join(__dirname, '../hosting.json'))
+const hostingList = Object.keys(options)
+let rawOption = false
+
+// accountlist start fromm
+let idItr = 2
+for (const argvs of process.argv.slice(2)) {
+  if (argvs.startsWith('--')) {
+    // raw option
+    if (argvs.slice(2) === 'raw') rawOption = true
+
+    // hosting options
+    else {
+      const i = hostingList.indexOf(argvs.slice(2))
+      if (i > 0) options.hostingList[i].default = true
+    }
+    idItr++
+  } else break
+}
+
+collect(process.argv.slice(idItr), options).then(res => {
+  if (rawOption) console.log(parseRaw(res))
+  else console.log(res)
+})
