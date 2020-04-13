@@ -1,5 +1,8 @@
 pubkey-collecter
 =====================
+[![Docker](https://github.com/mkontani/pubkey-collecter/workflows/Docker/badge.svg)](https://github.com/mkontani/pubkey-collecter/actions?query=workflow%3ADocker)
+[![npm](https://img.shields.io/npm/v/pubkey-collecter)](https://www.npmjs.com/package/pubkey-collecter)
+[![GitHub](https://img.shields.io/github/license/mkontani/pubkey-collecter)](https://github.com/mkontani/pubkey-collecter/blob/master/LICENSE)
 
 🗝🦅 Collect SSH Public keys from Git Hosting Services Github, Gitlab.
 
@@ -36,6 +39,8 @@ e.g.) pubkey-collecter --github --raw mkontani gitlab:niconico-pun
 See the detail below desc.
 
 ## Use as Container CLITOOL
+
+You can run [docker container](https://hub.docker.com/r/mkontani/pubkey-collecter) like following.
 
 ```:bash
 $ docker run mkontani/pubkey-collecter <your account1> <your account2> ...
@@ -104,6 +109,7 @@ console.log(pubRaw) // output is the same as abobe docker case
 
 |option|desc|
 |:--:|:--|
+|--help| Show usage |
 |--github|Search `github` service as default (used as default)|
 |--gitlab|Search `github` service as default |
 |--(custom Hosting Service)|Search custom Service as default (see detail [customize section](#customize))|
