@@ -23,11 +23,15 @@ General usage
 
 ```
 $ pubkey-collecter --<Options> [HostingService]:<account> ...
+      Options:
+        help                            show usage
+        (github|gitlab|custom-service)  search as default
+        raw                             Raw string output (useful for getting authorized_keys)
 
 e.g.) pubkey-collecter --github --raw mkontani gitlab:niconico-pun
 ```
 - Use `--` prefix for options
-- Space separate on accoount specification
+- Use space separation for multiple accounts specification
 
 See the detail below desc.
 
@@ -128,3 +132,5 @@ $ pubkey-collecter --custom mkontani
 // or specify prefix
 $ pubkey-collecter custom:mkontani
 ```
+
+You can set custom config file path by setting `HOSTING_CONF` env.

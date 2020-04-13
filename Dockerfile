@@ -3,4 +3,5 @@ FROM node:12-alpine
 WORKDIR /app
 COPY . /app/
 
-CMD ["npm", "start"]
+ENTRYPOINT ["bin/do"]
+CMD ["--help"]

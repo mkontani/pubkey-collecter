@@ -4,12 +4,12 @@
   "description": "Collect SSH Public keys from Git Hosting Services.",
   "main": "collecter.js",
   "scripts": {
-    "start": "node bin/collect",
+    "start": "node bin/do",
     "lint": "standard && eslint .",
     "lint-fix": "standard --fix"
   },
   "bin": {
-    "pubkey-collect": "./bin/collect"
+    "pubkey-collect": "./bin/do"
   },
   "repository": {
     "type": "git",
