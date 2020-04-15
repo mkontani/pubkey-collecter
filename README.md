@@ -28,7 +28,7 @@ General usage
 $ pubkey-collecter --<Options> [HostingService]:<account> ...
       Options:
         help                            show usage
-        (github|gitlab|custom-service)  search as default
+        (github|gitlab|custom-service)  search as default (default: github)
         raw                             Raw string output (useful for getting authorized_keys)
 
 e.g.) pubkey-collecter --github --raw mkontani gitlab:niconico-pun
@@ -101,7 +101,7 @@ const pubkeys = await collect(['github:octcat', 'gitlab:youraccount'])
 console.log(pubkeys) // output is the same as abobe docker case
 
 // get rawString
-const pubRaw = paarseRaw(pubkeys)
+const pubRaw = parseRaw(pubkeys)
 console.log(pubRaw) // output is the same as abobe docker case
 ```
 
@@ -123,9 +123,12 @@ Set `{id}` as account(id) part.
 
 ```:json
 
-    "custom":{
-        "api": "https://custom.github.com/api/v4/users/{id}/keys"
-    }
+    "custom-service1":{
+        "api": "https://custom1.github.com/api/v4/users/{id}/keys"
+    },
+    "custom-service2":{
+        "api": "https://custom2.github.com/api/v4/users/{id}/keys"
+    },
 
 ```
 
@@ -133,10 +136,10 @@ After editting `hosting.json`, you can specify like below.
 
 ```
 // set default search option
-$ pubkey-collecter --custom mkontani
+$ pubkey-collecter --custom-service1 mkontani
 
 // or specify prefix
-$ pubkey-collecter custom:mkontani
+$ pubkey-collecter custom-service2:mkontani
 ```
 
 You can set custom config file path by setting `HOSTING_CONF` env.
