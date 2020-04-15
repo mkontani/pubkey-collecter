@@ -6,10 +6,10 @@ const path = require('path')
 const options = process.env.HOSTING_CONF
   ? require(process.env.HOSTING_CONF) : require(path.join(__dirname, '../hosting.json'))
 const hostingList = Object.keys(options)
-let rawOption = false
+let rawOption = false; let useDefault = false
 
-// accountlist start fromm
-let idItr = 2
+// accountlist start from
+let IDpos = 2
 for (const arg of process.argv.slice(2)) {
   if (arg.startsWith('--')) {
     // help option
@@ -20,25 +20,34 @@ Usage:
 $ pubkey-collecter --<Options> [HostingService]:<account> ...
       Options:
         help                            show usage
-        (github|gitlab|custom-service)  search as default
+        (github|gitlab|custom-service)  search as default (default: github)
         raw                             Raw string output (useful for getting authorized_keys)
 
-e.g.) pubkey-collecter --github --raw mkontani gitlab:niconico-pun      
+e.g.) pubkey-collecter --gitlab --raw github:mkontani niconico-pun      
       `)
       process.exit(1)
     }
+
     // raw option
     if (arg.slice(2) === 'raw') rawOption = true
+
     // hosting options
     else {
       const i = hostingList.indexOf(arg.slice(2))
-      if (i > 0) options[hostingList[i]].default = true
+      if (i > 0) {
+        options[hostingList[i]].default = true
+        useDefault = true
+      }
     }
-    idItr++
-  } else break
+    IDpos++
+  } else { // specified ids
+    // if undefined defaultflag, github is used as default
+    if (!useDefault) options.github.default = true
+    break
+  }
 }
 
-collect(process.argv.slice(idItr), options).then(res => {
+collect(process.argv.slice(IDpos), options).then(res => {
   if (rawOption) console.log(parseRaw(res))
   else console.log(res)
 })

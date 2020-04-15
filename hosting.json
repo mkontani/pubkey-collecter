@@ -1,7 +1,6 @@
 {
     "github":{
-        "api": "https://api.github.com/users/{id}/keys",
-        "default": true
+        "api": "https://api.github.com/users/{id}/keys"
     },
     "gitlab":{
         "api": "https://gitlab.com/api/v4/users/{id}/keys"
