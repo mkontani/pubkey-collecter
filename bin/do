@@ -25,11 +25,11 @@ $ pubkey-collecter --<Options> [HostingService]:<account> ...
 
 e.g.) pubkey-collecter --gitlab --raw github:mkontani niconico-pun      
       `)
-      process.exit(1)
+      process.exit(0)
     }
 
     // raw option
-    if (arg.slice(2) === 'raw') rawOption = true
+    else if (arg.slice(2) === 'raw') rawOption = true
 
     // hosting options
     else {
